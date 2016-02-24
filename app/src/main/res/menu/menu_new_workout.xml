@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.jordanspell.gymrat.view.NewWorkoutActivity">
+    <item android:id="@+id/action_add_exercise"
+        android:icon="@drawable/add_icon"
+        android:title="Add Exercise"
+        android:onClick="addExercise"
+        app:showAsAction="always" />
+    <item android:id="@+id/action_change_rotation"
+        android:title="Change Rotation"
+        android:onClick="changeRotation"
+        app:showAsAction="always" />
+</menu>

@@ -1,0 +1,3 @@
+Launcher icon
+Extra tab on progression for all extra exercises
+Minus sign - swipe to remove new exercise

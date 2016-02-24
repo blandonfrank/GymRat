@@ -1,0 +1,44 @@
+<LinearLayout
+    android:id="@+id/homeLinearLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/grey">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="New Workout"
+            android:layout_weight="1"
+            android:layout_margin="40dp"
+            android:padding="20dp"
+            android:drawableLeft="@drawable/new_workout_icon"
+            android:background="@drawable/action_button_style"
+            android:onClick="newWorkout"
+            android:id="@+id/newWorkoutButton" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Progression"
+            android:layout_weight="1"
+            android:layout_margin="40dp"
+            android:padding="20dp"
+            android:drawableLeft="@drawable/progress_icon"
+            android:background="@drawable/action_button_style"
+            android:onClick="viewProgression"
+            android:id="@+id/progressionButton" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="History"
+            android:layout_weight="1"
+            android:layout_margin="40dp"
+            android:padding="20dp"
+            android:drawableLeft="@drawable/calendar_icon"
+            android:background="@drawable/action_button_style"
+            android:onClick="viewHistory"
+            android:id="@+id/history_Button" />
+</LinearLayout>

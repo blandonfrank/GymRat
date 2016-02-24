@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Gym Rat 5x5</string>
+    <string name="action_settings">Settings</string>
+
+    <color name="black">#000000</color>
+    <color name="grey">#CCCCCC</color>
+    <color name="lightblue">#AAECFF</color>
+
+    <string name="title_activity_new_workout">New Workout</string>
+    <string name="title_activity_history">History</string>
+    <string name="title_activity_progression">Progress</string>
+    <string name="title_activity_update_workout">Update Workout</string>
+    <string name="title_activity_exercise_list">Exercise List</string>
+
+</resources>
