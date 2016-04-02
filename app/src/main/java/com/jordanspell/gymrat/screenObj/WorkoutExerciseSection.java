@@ -354,7 +354,6 @@ public class WorkoutExerciseSection {
 
         boolean isStandardExercise = false;
         for(int i=0; i<workoutExerciseList.size(); i++) {
-            System.out.println(workoutExerciseList.get(i).getWorkoutExerciseName() + " " + workoutExerciseList.get(i).isPrimary());
             if(workoutExerciseList.get(i).getId() == workoutExerciseId && workoutExerciseList.get(i).isPrimary()==1) {
                 isStandardExercise = true;
             }
@@ -384,6 +383,7 @@ public class WorkoutExerciseSection {
                                 WorkoutExerciseSection workoutExerciseSection = i.next();
                                 if(workoutExerciseSection.getWorkoutExerciseId() == workoutExerciseId) {
                                     i.remove();
+                                    workoutActivity.getDb().deleteWorkoutExerciseFromRotationById(workoutExerciseId);
                                 }
                             }
                             return true;

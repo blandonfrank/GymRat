@@ -150,7 +150,7 @@ public class NewWorkoutActivity extends ActionBarActivity implements WorkoutActi
      * Creates a dialog box that allows the user to add extra exercises to their workout
      */
     public void addExercise(final MenuItem item) {
-        final List<WorkoutExercise> extraWorkoutExerciseList = this.db.getAllWorkoutExercisesByRotation("C");
+        final List<WorkoutExercise> extraWorkoutExerciseList = this.db.getAllAuxiliaryWorkoutExercises();
 
         List<String> extraWorkoutExerciseNames = new LinkedList<>();
 
@@ -230,7 +230,7 @@ public class NewWorkoutActivity extends ActionBarActivity implements WorkoutActi
                             public void onClick(DialogInterface dialog, int id) {
                                 WorkoutExercise workoutExercise = db.getWorkoutExerciseByName(newExerciseText.getText().toString().trim());
                                 if (workoutExercise.getWorkoutExerciseName() == null) {
-                                    db.addWorkoutExercise(new WorkoutExercise(newExerciseText.getText().toString().trim(), "C"));
+                                    db.addWorkoutExercise(new WorkoutExercise(newExerciseText.getText().toString().trim(), "C", 0));
                                 }
                                 dialog.dismiss();
                                 addExercise(item);

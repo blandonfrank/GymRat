@@ -246,7 +246,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
                 db.query(TABLE_WORKOUT_EXERCISE,
                         WORKOUT_EXERCISE_COLUMNS,
                         " WORKOUT_EXERCISE_ID = ?",
-                        new String[] { String.valueOf(id) },
+                        new String[]{String.valueOf(id)},
                         null, // e. group by
                         null, // f. having
                         null, // g. order by
@@ -400,6 +400,26 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         return workoutExerciseList;
     }
 
+    public List<WorkoutExercise> getAllAuxiliaryWorkoutExercises() {
+        List<WorkoutExercise> workoutExerciseList = new LinkedList<>();
+
+        String query = "SELECT DISTINCT(WORKOUT_EXERCISE_NAME) FROM " + TABLE_WORKOUT_EXERCISE + " WHERE WORKOUT_PRIMARY = 0 ORDER BY WORKOUT_ROTATION ASC";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        WorkoutExercise workoutExercise;
+        if (cursor.moveToFirst()) {
+            do {
+                workoutExercise = new WorkoutExercise();
+                workoutExercise.setWorkoutExerciseName(cursor.getString(0));
+                workoutExerciseList.add(workoutExercise);
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+
+        return workoutExerciseList;
+    }
     public List<WorkoutExercise> getAllPrimaryWorkoutExercises() {
         List<WorkoutExercise> workoutExerciseList = new LinkedList<>();
 
@@ -742,6 +762,33 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
 
         db.close();
     }
+
+    public void deleteWorkoutExerciseFromRotationById(int workoutID) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(WORKOUT_ROTATION, "C");
+
+        db.update(TABLE_WORKOUT_EXERCISE,
+                values, WORKOUT_EXERCISE_ID + "=?",
+                new String[]{String.valueOf(workoutID)});
+
+        db.close();
+    }
+
+    public void addWorkoutExerciseToRotationByName(String ExerciseName, String rotation) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(WORKOUT_ROTATION, rotation);
+
+        db.update(TABLE_WORKOUT_EXERCISE,
+                values, WORKOUT_EXERCISE_NAME + "=?",
+                new String[]{String.valueOf(ExerciseName) });
+
+        db.close();
+    }
+
 
     public void deleteWorkoutSetType(WorkoutSetType workoutSetType) {
         SQLiteDatabase db = this.getWritableDatabase();
