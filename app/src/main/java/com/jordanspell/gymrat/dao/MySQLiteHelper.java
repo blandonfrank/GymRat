@@ -68,13 +68,14 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         db.execSQL("CREATE TABLE WORKOUT_EXERCISE (" +
                 "WORKOUT_EXERCISE_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "WORKOUT_EXERCISE_NAME TEXT, "+
-                "WORKOUT_ROTATION TEXT)");
+                "WORKOUT_ROTATION TEXT," +
+                "WORKOUT_PRIMARY INTEGER DEFAULT 0)");
 
-        db.execSQL("INSERT INTO WORKOUT_EXERCISE VALUES (?, 'Squats','')");
-        db.execSQL("INSERT INTO WORKOUT_EXERCISE VALUES (?, 'Bench Press','A')");
-        db.execSQL("INSERT INTO WORKOUT_EXERCISE VALUES (?, 'Barbell Row','A')");
-        db.execSQL("INSERT INTO WORKOUT_EXERCISE VALUES (?, 'Overhead Press','B')");
-        db.execSQL("INSERT INTO WORKOUT_EXERCISE VALUES (?, 'Deadlift','B')");
+        db.execSQL("INSERT INTO WORKOUT_EXERCISE VALUES (?, 'Squats','', 1)");
+        db.execSQL("INSERT INTO WORKOUT_EXERCISE VALUES (?, 'Bench Press','A', 1)");
+        db.execSQL("INSERT INTO WORKOUT_EXERCISE VALUES (?, 'Barbell Row','A', 1)");
+        db.execSQL("INSERT INTO WORKOUT_EXERCISE VALUES (?, 'Overhead Press','B',1)");
+        db.execSQL("INSERT INTO WORKOUT_EXERCISE VALUES (?, 'Deadlift','B', 1)");
 
         db.execSQL("CREATE TABLE WORKOUT_SET_TYPE (" +
                 "WORKOUT_SET_TYPE_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -238,6 +239,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     }
 
     public WorkoutExercise getWorkoutExercise(int id) {
+
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor =
@@ -257,6 +259,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
             workoutExercise.setId(Integer.parseInt(cursor.getString(0)));
             workoutExercise.setWorkoutExerciseName(cursor.getString(1));
             workoutExercise.setRotation(cursor.getString(2));
+            workoutExercise.setPrimary(Integer.parseInt(cursor.getString(3)));
             cursor.close();
         }
 
@@ -388,7 +391,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
                 workoutExercise.setId(Integer.parseInt(cursor.getString(0)));
                 workoutExercise.setWorkoutExerciseName(cursor.getString(1));
                 workoutExercise.setRotation(cursor.getString(2));
-
+                workoutExercise.setPrimary(Integer.parseInt(cursor.getString(3)));
                 workoutExerciseList.add(workoutExercise);
             } while (cursor.moveToNext());
             cursor.close();
@@ -397,10 +400,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         return workoutExerciseList;
     }
 
-    public List<WorkoutExercise> getAllStandardWorkoutExercises() {
+    public List<WorkoutExercise> getAllPrimaryWorkoutExercises() {
         List<WorkoutExercise> workoutExerciseList = new LinkedList<>();
 
-        String query = "SELECT  * FROM " + TABLE_WORKOUT_EXERCISE + " WHERE WORKOUT_ROTATION IN ('','A','B') ORDER BY WORKOUT_ROTATION ASC";
+        String query = "SELECT  * FROM " + TABLE_WORKOUT_EXERCISE + " WHERE WORKOUT_ROTATION IN ('','A','B') AND WORKOUT_PRIMARY = 1 ORDER BY WORKOUT_ROTATION ASC";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
@@ -412,6 +415,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
                 workoutExercise.setId(Integer.parseInt(cursor.getString(0)));
                 workoutExercise.setWorkoutExerciseName(cursor.getString(1));
                 workoutExercise.setRotation(cursor.getString(2));
+                workoutExercise.setPrimary(Integer.parseInt(cursor.getString(3)));
 
                 workoutExerciseList.add(workoutExercise);
             } while (cursor.moveToNext());
@@ -449,7 +453,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
                 workoutExercise.setId(Integer.parseInt(cursor.getString(0)));
                 workoutExercise.setWorkoutExerciseName(cursor.getString(1));
                 workoutExercise.setRotation(cursor.getString(2));
-
+                workoutExercise.setPrimary(Integer.parseInt(cursor.getString(3)));
                 workoutExerciseList.add(workoutExercise);
             } while (cursor.moveToNext());
             cursor.close();
@@ -474,7 +478,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
                 workoutExercise.setId(Integer.parseInt(cursor.getString(0)));
                 workoutExercise.setWorkoutExerciseName(cursor.getString(1));
                 workoutExercise.setRotation(cursor.getString(2));
-
+                workoutExercise.setPrimary(Integer.parseInt(cursor.getString(3)));
                 workoutExerciseList.add(workoutExercise);
             } while (cursor.moveToNext());
             cursor.close();

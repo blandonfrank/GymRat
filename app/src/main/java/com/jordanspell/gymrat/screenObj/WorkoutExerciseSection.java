@@ -2,6 +2,7 @@ package com.jordanspell.gymrat.screenObj;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.SyncStatusObserver;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.v7.app.ActionBarActivity;
@@ -353,7 +354,8 @@ public class WorkoutExerciseSection {
 
         boolean isStandardExercise = false;
         for(int i=0; i<workoutExerciseList.size(); i++) {
-            if(workoutExerciseList.get(i).getId() == workoutExerciseId) {
+            System.out.println(workoutExerciseList.get(i).getWorkoutExerciseName() + " " + workoutExerciseList.get(i).isPrimary());
+            if(workoutExerciseList.get(i).getId() == workoutExerciseId && workoutExerciseList.get(i).isPrimary()==1) {
                 isStandardExercise = true;
             }
         }

@@ -1,5 +1,7 @@
 package com.jordanspell.gymrat.model;
 
+import android.nfc.tech.IsoDep;
+
 /**
  * Created by jorda_000 on 2/13/2015.
  */
@@ -9,6 +11,16 @@ public class WorkoutExercise {
     private String workoutExerciseName;
     private String rotation;
 
+    public int isPrimary() {
+        return isPrimary;
+    }
+
+    public void setPrimary(int isPrimary) {
+        this.isPrimary = isPrimary;
+    }
+
+    private int isPrimary;
+
     public WorkoutExercise() {
 
     }
@@ -17,6 +29,13 @@ public class WorkoutExercise {
         super();
         this.workoutExerciseName = workoutExerciseName;
         this.rotation = rotation;
+    }
+
+    public WorkoutExercise(String workoutExerciseName, String rotation, int isPrimary) {
+        super();
+        this.workoutExerciseName = workoutExerciseName;
+        this.rotation = rotation;
+        this.isPrimary = isPrimary;
     }
 
     public int getId() {

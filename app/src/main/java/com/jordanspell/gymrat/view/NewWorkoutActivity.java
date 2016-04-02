@@ -161,12 +161,13 @@ public class NewWorkoutActivity extends ActionBarActivity implements WorkoutActi
             boolean alreadyExists = false;
             WorkoutExercise workoutExercise = i.next();
             for(int j=0; j<this.displayedWorkoutExerciseSections.size(); j++) {
-                if(workoutExercise.getId() == this.displayedWorkoutExerciseSections.get(j).getWorkoutExerciseId()) {
+                if(workoutExercise.getWorkoutExerciseName().equals(this.displayedWorkoutExerciseSections.get(j).getWorkoutExerciseName())) {
                     alreadyExists = true;
                 }
             }
             if(!alreadyExists) {
                 extraWorkoutExerciseNames.add(workoutExercise.getWorkoutExerciseName());
+
             }
             else {
                 i.remove();
@@ -192,6 +193,7 @@ public class NewWorkoutActivity extends ActionBarActivity implements WorkoutActi
                         if (((AlertDialog) dialog).getListView().getAdapter().getItem(j).toString().equals(extraWorkoutExerciseList.get(j).getWorkoutExerciseName())) {
                             createExerciseRow(extraWorkoutExerciseList.get(j));
                             addedNewExercise = true;
+                            db.addWorkoutExercise(new WorkoutExercise(extraWorkoutExerciseList.get(j).getWorkoutExerciseName(), db.getCurrentWorkoutRotation(), 0));
                         }
                     }
                 }

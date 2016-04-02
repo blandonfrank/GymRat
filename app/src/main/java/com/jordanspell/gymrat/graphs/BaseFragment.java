@@ -118,7 +118,7 @@ public class BaseFragment extends Fragment {
 
         ArrayList<LineDataSet> dataSets = new ArrayList<>();
 
-        List<WorkoutExercise> listOfWorkoutExercises = db.getAllStandardWorkoutExercises();
+        List<WorkoutExercise> listOfWorkoutExercises = db.getAllPrimaryWorkoutExercises();
 
         String currentWeightType = db.getCurrentWeightType();
 
